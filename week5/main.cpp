@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <vector>
 #include <math.h>
-#include <GL/freeglut.h>
+#include <OpenGL/OpenGL.h>
+#include <GLUT/GLUT.h>
 
 struct pt { double x; double y; double z; };
 int width = 500, height = 500;
@@ -38,6 +39,7 @@ void DrawCircle(double ctrX, double ctrY, double radius) {
     glEnd();
 }
 
+
 void DrawObject() {
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -48,9 +50,10 @@ void DrawObject() {
     printf("value %f\n", value);
     double radius = 1.0;
     cameraPos.x = radius * cos(value);
-    cameraPos.y = 1.0;
+//    cameraPos.y = 1.0;
+    cameraPos.y = cos(value);
     cameraPos.z = radius * sin(value);
-    gluLookAt(cameraPos.x, cameraPos.y, cameraPos.z, 0, 0, 0, 0, 1, 0);
+    gluLookAt(cameraPos.x+1, cameraPos.y+1, cameraPos.z+1, 0, 0, 0, 0, 1, 0);
 
     DrawAxis();
 
@@ -83,7 +86,7 @@ void DrawObject() {
     glVertex3f(0.5, 0, -0.5);
     glVertex3f(0, 0.5, 0);
     glEnd();
- 
+
     glutSwapBuffers();
 }
 
@@ -104,6 +107,7 @@ void KeyDown(unsigned char key, int x, int y)
 
     glutPostRedisplay();
 }
+
 void KeySpecial(int key, int x, int y)
 {
     switch(key)
@@ -117,6 +121,7 @@ void KeySpecial(int key, int x, int y)
     }
     glutPostRedisplay();
 }
+
 void Mouse(int button, int state, int x, int y)
 {
     if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
@@ -124,6 +129,7 @@ void Mouse(int button, int state, int x, int y)
 
     glutPostRedisplay();
 }
+
 void Motion(int x, int y)
 {
     printf("Mouse motion (%d %d)\n", x, y);
