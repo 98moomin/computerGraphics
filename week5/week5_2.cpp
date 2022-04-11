@@ -1,152 +1,67 @@
-#include <stdio.h>
-#include <vector>
-#include <math.h>
+#define GL_SILENCE_DEPRECATION
+
 #include <OpenGL/OpenGL.h>
 #include <GLUT/GLUT.h>
 
-struct pt { double x; double y; double z; };
-int width = 500, height = 500;
-int arrowIdx = 0;
-double PI = 3.14159265;
-double PI20 = 3.14159265 * 2.0;
-std::vector<pt> pts;
-
-void DrawAxis(){
-    glLineWidth(3.0);
-    glBegin(GL_LINES);
-    glColor3f(1, 0, 0);
-    glVertex2f(0, 0);
-    glVertex2f(1, 0);
-    glColor3f(0, 1, 0);
-    glVertex2f(0, 0);
-    glVertex2f(0, 1);
-    glColor3f(0, 0, 1);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 1);
-    glEnd();
+void InitLight() {
+    GLfloat mat_diffuse[] = { 0.5, 0.4, 0.3, 1.0 };
+    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat mat_ambient[] = { 0.5, 0.4, 0.3, 1.0 };
+    GLfloat mat_shininess[] = { 50.0 };
+    GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat light_diffuse[] = { 0.8, 0.8, 0.8, 1.0 };
+    GLfloat light_ambient[] = { 0.3, 0.3, 0.3, 1.0 };
+    GLfloat light_position[] = { -3, 2, 3.0, 0.0 };
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 }
 
-void DrawCircle(double ctrX, double ctrY, double radius) {
-    int res = 100;
-    glBegin(GL_LINE_LOOP);
-    for(int i = 0; i < res; i++)
-    {
-        double theta = PI * 2.0 * double(i) / double(res);
-        double x = radius * cos(theta) + ctrX;
-        double y = radius * sin(theta) + ctrY;
-        glVertex2d(x, y);
-    }
-    glEnd();
+void InitVisibility() {
+    // glEnable(GL_CULL_FACE);
+    // glFrontFace(GL_CW);
+    // glCullFace(GL_BACK);
+    // glEnable(GL_DEPTH_TEST);
 }
 
-
-void DrawObject() {
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glViewport(0, height/2, width/2, height/2);
+void MyDisplay() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
-    gluLookAt(5, 5, 5, 0, 0, 0, 0, 1, 0);
-    glColor3f(1, 0, 0);
-    glutWireTeapot(0.5);
 
-    glViewport(width/2, height/2, width/2, height/2);
-    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(0.0, 0.4, 0.5, 0.0, -0.5, -1.0, 0.0, 1.0, 0.0);
+    glutSolidTeapot(0.58);
+    glFlush();
+}
+
+void MyReshape(int w, int h) {
+    glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
-    gluLookAt(5, 0, 0, 0, 0, 0, 0, 1, 0);
-    glColor3f(0, 1, 0);
-    glutWireTeapot(0.5);
 
-    glViewport(0, 0, width/2, height/2);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
-    gluLookAt(0, 5, 0, 0, 0, 0, 1, 0, 0);
-    glColor3f(0, 0, 1);
-    glutWireTeapot(0.5);
-
-    glViewport(width/2, 0, width/2, height/2);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
-    gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
-    glColor3f(0, 1, 1);
-    glutWireTeapot(0.5);
-
-    glutSwapBuffers();
-}
-
-void Init() {
-//    glViewport(0, 0, width, height);
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-}
-
-void KeyDown(unsigned char key, int x, int y) {
-    switch(key)
-    {
-    case 'p': case 'P':
-        printf("Hello world!\n");
-        break;
-    }
-
-    glutPostRedisplay();
-}
-
-void KeySpecial(int key, int x, int y) {
-    switch(key)
-    {
-        case GLUT_KEY_UP:
-            arrowIdx++;
-            break;
-        case GLUT_KEY_DOWN:
-            arrowIdx--;
-            break;
-    }
-    glutPostRedisplay();
-}
-
-void Mouse(int button, int state, int x, int y) {
-    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-        printf("Mouse Click (%d %d)\n", x, y);
-
-    glutPostRedisplay();
-}
-
-void Motion(int x, int y) {
-    printf("Mouse motion (%d %d)\n", x, y);
-
-    double xd, yd;
-    xd = x / 500.0 * 4.0 - 2.0;
-    yd = y / 500.0 * 4.0 - 2.0;
-    yd *= -1.0;
-
-    glutPostRedisplay();
-}
-
-void Timer(int value) {
-    arrowIdx++;
-    glutTimerFunc(30, Timer, 1);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 2.0);
 }
 
 int main(int argc, char** argv) {
-    int mode = GLUT_RGB | GLUT_DOUBLE;
-
     glutInit(&argc, argv);
-    glutInitDisplayMode(mode);
-    glutInitWindowPosition(300, 300);
-    glutInitWindowSize(width, height);
-    glutCreateWindow("OpenGL");
-    glutSetWindowTitle("DAU CG");
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
+    glutInitWindowSize(500, 500);
+    glutInitWindowPosition(0, 0);
+    glutCreateWindow("Z-Buffer Algorithm");
+    glClearColor(0.5, 0.5, 0.5, 0.0);
+    InitLight();
+    InitVisibility();
+    glutDisplayFunc(MyDisplay);
+    glutReshapeFunc(MyReshape);
 
-    Init();
-    glutDisplayFunc(DrawObject);
-    glutKeyboardFunc(KeyDown);
-    glutMouseFunc(Mouse);
-    glutSpecialFunc(KeySpecial);
-    glutMotionFunc(Motion);
-    // glutIdleFunc(DrawObject);
-    // glutTimerFunc(1, Timer, 1);
     glutMainLoop();
+    return 0;
 }
