@@ -32,11 +32,11 @@
 		69BF2BC327FEA37C00118D84 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2D41227F57714000F2059 /* OpenGL.framework */; };
 		69BF2BC527FEA39100118D84 /* week5_3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69BF2BC427FEA39100118D84 /* week5_3.cpp */; };
 		69C6FA42280469DC00532F62 /* week5_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69C6FA41280469DC00532F62 /* week5_2.cpp */; };
-		69C6FA4328046BA700532F62 /* week4_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69BF2BBD27FEA37000118D84 /* week4_2.cpp */; };
 		69C6FA4528046BDD00532F62 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69C6FA4428046BDD00532F62 /* main.cpp */; };
 		69C6FA4D28046CE100532F62 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69C6FA4C28046CE100532F62 /* main.cpp */; };
 		69C6FA5128046CED00532F62 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2D41427F57718000F2059 /* GLUT.framework */; };
 		69C6FA5228046CED00532F62 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A2D41227F57714000F2059 /* OpenGL.framework */; };
+		69D5452C28046DAC00DC2F96 /* week4_2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69D5452B28046DAC00DC2F96 /* week4_2.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -125,12 +125,12 @@
 		69BF2BAE27FEA2EC00118D84 /* week4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = week4; sourceTree = BUILT_PRODUCTS_DIR; };
 		69BF2BB027FEA2EC00118D84 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		69BF2BBB27FEA37000118D84 /* week5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = week5; sourceTree = BUILT_PRODUCTS_DIR; };
-		69BF2BBD27FEA37000118D84 /* week4_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = week4_2.cpp; path = ../week5/week4_2.cpp; sourceTree = "<group>"; };
 		69BF2BC427FEA39100118D84 /* week5_3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = week5_3.cpp; sourceTree = "<group>"; };
 		69C6FA41280469DC00532F62 /* week5_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = week5_2.cpp; sourceTree = "<group>"; };
 		69C6FA4428046BDD00532F62 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		69C6FA4A28046CE100532F62 /* week7 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = week7; sourceTree = BUILT_PRODUCTS_DIR; };
 		69C6FA4C28046CE100532F62 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		69D5452B28046DAC00DC2F96 /* week4_2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = week4_2.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				69BF2BB027FEA2EC00118D84 /* main.cpp */,
-				69BF2BBD27FEA37000118D84 /* week4_2.cpp */,
+				69D5452B28046DAC00DC2F96 /* week4_2.cpp */,
 			);
 			path = week4;
 			sourceTree = "<group>";
@@ -524,8 +524,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69C6FA4328046BA700532F62 /* week4_2.cpp in Sources */,
 				69BF2BB127FEA2EC00118D84 /* main.cpp in Sources */,
+				69D5452C28046DAC00DC2F96 /* week4_2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
