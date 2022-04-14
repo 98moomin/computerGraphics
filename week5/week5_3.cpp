@@ -59,7 +59,7 @@ void DrawObject() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glOrtho(-1.0, 1.0, -1.0, 1.0, -10.0, 10.0);
-    gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0);
+    gluLookAt(0, 0, 5, 0, 0, 0, 1, 0, 0);
     glColor3f(0, 1, 0);
     glutWireTeapot(0.5);
 
